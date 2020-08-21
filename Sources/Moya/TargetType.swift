@@ -1,8 +1,7 @@
 import Foundation
-
 /// The protocol used to define the specifications necessary for a `MoyaProvider`.
 public protocol TargetType {
-
+    typealias Success = ((Any?)->Void)?
     /// The target's base `URL`.
     var baseURL: URL { get }
 
@@ -23,6 +22,14 @@ public protocol TargetType {
 
     /// The headers to be used in the request.
     var headers: [String: String]? { get }
+
+    /// <<------ janlionly added ---------
+    var parameters: [String: Any]? { get }
+    var isEncrypt: Bool { get }
+    var isCache: Bool { get }
+    var needToken: Bool { get }
+    func request(success: Success)
+    /// -------------------------------->>
 }
 
 public extension TargetType {
@@ -31,4 +38,21 @@ public extension TargetType {
     var validationType: ValidationType {
         return .none
     }
+
+    var parameters: [String: Any]? {
+        return nil
+    }
+
+    var isEncrypt: Bool {
+        return false
+    }
+
+    var isCache: Bool {
+        return true
+    }
+
+    var needToken: Bool {
+      return false
+    }
+    func request(success: Success = nil) {}
 }
