@@ -29,6 +29,7 @@ public protocol TargetType {
     var isCache: Bool { get }
     var needToken: Bool { get }
     func request(success: Success)
+    func isEqual(to: TargetType) -> Bool
     /// -------------------------------->>
 }
 
@@ -54,5 +55,10 @@ public extension TargetType {
     var needToken: Bool {
       return false
     }
+
     func request(success: Success = nil) {}
+
+    func isEqual(to: TargetType) -> Bool {
+        return self.path == to.path
+    }
 }
