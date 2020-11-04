@@ -28,6 +28,7 @@ public protocol TargetType {
     var isEncrypt: Bool { get }
     var isCache: Bool { get }
     var needToken: Bool { get }
+    var isSimulate: Bool { get }
     func request(success: Success)
     func isEqual(to: TargetType) -> Bool
     /// -------------------------------->>
@@ -53,6 +54,10 @@ public extension TargetType {
     }
 
     var needToken: Bool {
+      return false
+    }
+
+    var isSimulate: Bool {
       return false
     }
 
