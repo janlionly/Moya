@@ -1,7 +1,6 @@
 import Foundation
 /// The protocol used to define the specifications necessary for a `MoyaProvider`.
 public protocol TargetType {
-    typealias Success = ((Any?)->Void)?
     /// The target's base `URL`.
     var baseURL: URL { get }
 
@@ -29,7 +28,6 @@ public protocol TargetType {
     var isCache: Bool { get }
     var needToken: Bool { get }
     var isSimulate: Bool { get }
-    func request(success: Success)
     func isEqual(to: TargetType) -> Bool
     /// -------------------------------->>
 }
@@ -60,8 +58,6 @@ public extension TargetType {
     var isSimulate: Bool {
       return false
     }
-
-    func request(success: Success = nil) {}
 
     func isEqual(to: TargetType) -> Bool {
         return self.path == to.path
